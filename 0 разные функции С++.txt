@@ -1,0 +1,174 @@
+bool is_simple(int n)    // проверка числа на простоту
+{
+    for(int i = 2; i < n; i++)
+    {
+        if( ! (n % i)) return false;
+    }
+    return true;
+}
+
+void binary(unsigned int n)    // вывод числа в двоичном виде
+{
+   int bin_num;
+   bin_num = n % 2;
+   n /= 2;
+   if (n) binary(n);
+   cout << bin_num;
+}
+
+unsigned long long int fibonacci(unsigned int n)    // числа фибоначи(вводится номер)
+{
+    unsigned long long int num_1 = 0, num_2 = 1, num_final = 0;
+    if(n == 1) return num_1;
+    if(n == 2) return num_2;
+    for(unsigned int counter = 1; counter != (n - 1); counter++)
+    {
+        num_final = num_1 + num_2;
+        num_1 = num_2;
+        num_2 = num_final;
+    }
+    return num_final;
+}
+
+unsigned long long int nonacci(unsigned int n)    // числа ноначчи(вводится номер)
+{
+    unsigned long long int num_0 = 0, num_1 = 0, num_2 = 0, num_3 = 0, num_4 = 0, num_5 = 0, num_6 = 0, num_7 = 0, num_8 = 1, num_final = 0;
+    if(n < 8) return num_1;
+    if(n == 8) return num_8;
+    for(unsigned int counter = 8; counter != n; counter++)
+    {
+        num_final = num_0 + num_1 + num_2 + num_3 + num_4 + num_5 + num_6 + num_7 + num_8;
+        num_0 = num_1;
+        num_1 = num_2;
+        num_2 = num_3;
+        num_3 = num_4;
+        num_4 = num_5;
+        num_5 = num_6;
+        num_6 = num_7;
+        num_7 = num_8;
+        num_8 = num_final;
+    }
+    return num_final;
+}
+
+char leveling(char c)    // из заглавных букв в обычные
+{
+    const int to_lower = 32;
+    if(65 <= int(c) && int(c) <= 90) c += to_lower;
+    return c;
+}
+
+unsigned long long int get_a_hexadecimal()    // перевод в десятиричную из шестнадцатиричной
+{
+    unsigned long long int desat = 0;
+    for(;;)
+    {
+        char c = cin.get();
+        if(c == ' ' || c == '\t' || c == '\n') break;
+        if('A' <= c && c <= 'F') desat += (int(c) - 55);
+        if('a' <= c && c <= 'f') return 0;
+        if('0' <= c && c <= '9') desat += (int(c) - '0');
+        desat *= 16;
+    }
+    desat /= 16;
+    return desat;
+}
+
+void massiv(int num){    // ввод в массив
+    int nums[1000];
+    for(int i = 0; i < num; i++){
+        int mas_num;
+        cin >> mas_num;
+        nums[i] = mas_num;
+}
+
+void massiv_sort(int num){    // ввод массива с сортировкой от большего к меньшему
+    int nums[1000];
+    for(int i = 0; i < num; i++){
+        int mas_num;
+        cin >> mas_num;
+        nums[i] = mas_num;
+    }
+    for(int coeff = 0, promez;;){
+        for(int i = 0; i < num - 1; i++){
+            if (nums[i] < nums[i + 1]) {
+                promez = nums[i];
+                nums[i] = nums[i + 1];
+                nums[i + 1] = promez;
+                coeff += 1;
+            }
+        }
+        if (!coeff) break;
+        coeff = 0;
+    }
+    for(int i = 0; i < num; i++){
+        cout << nums[i] << ' ';
+    }
+}
+
+void matriza(int str, int stb){    // вбивание чисел в матрицу
+    int nums[100][100];
+    for(int i = 0; i < str; i++){
+        for(int j = 0; j < stb; j++){
+            int mas_num;
+            cin >> mas_num;
+            nums[i][j] = mas_num;
+        }
+    }
+
+void matriza_t(int str, int stb){    // транспонирование матрицы
+    int nums[100][100] = {0}, nums_t[100][100] = {0};
+    for(int i = 0; i < str; i++){
+        for(int j = 0; j < stb; j++){
+            int mas_num;
+            cin >> mas_num;
+            nums[i][j] = mas_num;
+        }
+    }
+    for(int i = 0; i < str; i++){
+        for(int j = 0; j < stb; j++){
+            nums_t[j][i] = nums[i][j];
+        }
+    }
+    for(int i = 0; i < stb; i++){
+        for(int j = 0; j < str; j++){
+            cout << nums_t[i][j] << ' ';
+        }
+        cout << endl;
+    }
+}
+
+int nod(int a, int b) {
+    int rez;
+    a = a > 0 ? a : -a;
+    b = b > 0 ? b : -b;
+
+    if(a == 0)
+        rez = b;
+    else if(b == 0)
+        rez = a;
+    else if(a == b)
+        rez = a;
+    else if(a == 1 || b == 1)
+        rez = 1;
+    else {
+        int ra = a % 2, rb = b % 2;
+        if(!(ra || rb))
+            rez = 2 * nod(a / 2, b / 2);
+        else if(!ra)
+            rez = nod(a / 2, b);
+        else if(!rb)
+            rez = nod(b / 2, a);
+        else if(a > b)
+            rez = nod(a - b, b);
+        else
+            rez = nod(b - a, a);
+    }
+
+    return rez;
+}
+
+int nok(int a, int b) {
+    return a*b/nod(a,b);
+}
+
