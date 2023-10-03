@@ -180,3 +180,33 @@ float pow(float a, float b){    // возведение числа а в сте�
     return result;
 }
 
+int find_x(int x, int* array, int n){    // быстрый поиск числа х в массиве array
+    int st = 0;
+    n -= 1;
+    if(array[st] == x){
+        return st;
+    }
+    if(array[n] == x){
+        return n;
+    }
+    for(;n != st;){
+        if(1 <= (n - st) && (n - st) <= 5){
+            for(int i = st; i <= n; i++){
+                if(array[i] == x){
+                    return i;
+                }
+            }
+            return -1;
+        }
+        if(array[(n - st)/2 + st] == x) {
+            return ((n - st)/2 + st);
+        }
+        if(array[(n - st)/2 + st] < x) {
+            st = (n - st)/2 + st;
+        }
+        else {
+            n = (n - st)/2 + st;
+        }
+    }
+    return -1;
+}
