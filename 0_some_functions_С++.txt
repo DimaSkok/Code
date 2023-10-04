@@ -82,16 +82,10 @@ void massiv(int num){    // ввод в массив
         nums[i] = mas_num;
 }
 
-void massiv_sort(int num){    // ввод массива с сортировкой от большего к меньшему
-    int nums[1000];
-    for(int i = 0; i < num; i++){
-        int mas_num;
-        cin >> mas_num;
-        nums[i] = mas_num;
-    }
+int* massiv_sort(int* nums, int num){    // сортировка пузырьком
     for(int coeff = 0, promez;;){
         for(int i = 0; i < num - 1; i++){
-            if (nums[i] < nums[i + 1]) {
+            if (nums[i] > nums[i + 1]) {
                 promez = nums[i];
                 nums[i] = nums[i + 1];
                 nums[i + 1] = promez;
@@ -101,9 +95,7 @@ void massiv_sort(int num){    // ввод массива с сортировко
         if (!coeff) break;
         coeff = 0;
     }
-    for(int i = 0; i < num; i++){
-        cout << nums[i] << ' ';
-    }
+    return nums;
 }
 
 void matriza(int str, int stb){    // вбивание чисел в матрицу
@@ -180,3 +172,33 @@ float pow(float a, float b){    // возведение числа а в сте�
     return result;
 }
 
+int find_x(int x, int* array, int n){    // быстрый поиск числа х в массиве array
+    int st = 0;
+    n -= 1;
+    if(array[st] == x){
+        return st;
+    }
+    if(array[n] == x){
+        return n;
+    }
+    for(;n != st;){
+        if(1 <= (n - st) && (n - st) <= 5){
+            for(int i = st; i <= n; i++){
+                if(array[i] == x){
+                    return i;
+                }
+            }
+            return -1;
+        }
+        if(array[(n - st)/2 + st] == x) {
+            return ((n - st)/2 + st);
+        }
+        if(array[(n - st)/2 + st] < x) {
+            st = (n - st)/2 + st;
+        }
+        else {
+            n = (n - st)/2 + st;
+        }
+    }
+    return -1;
+}
