@@ -203,3 +203,12 @@ int find_x(int x, int* array, int n){    // быстрый поиск числа
     return -1;
 }
 
+unsigned long long factorial(int num)    // факториал
+{
+    unsigned long long res = 1;
+    if(num == 0 || num == 1) return 1;
+    for(int i = 1; i <= num; i++){
+        res *= i;
+    }
+    return res;
+}
