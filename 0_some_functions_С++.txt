@@ -212,3 +212,87 @@ unsigned long long factorial(int num)    // факториал
     }
     return res;
 }
+
+// --------------------------------------    (quicksort)
+int partition(int* arr, int end, int start)
+{
+    int p = (end + start) / 2, i = start, j = end;
+    while(i < j){
+        while(arr[i] < arr[p]) i += 1;
+        while(arr[j] > arr[p]) j -= 1;
+        if(i >= j) break;
+        std::swap(arr[i++], arr[j--]);
+    }
+    return p;
+}
+
+int* quicksort(int* arr, int end, int start)
+{
+    if(start < end){
+        int p = partition(arr, end, start);
+        quicksort(arr, p,  start);
+        quicksort(arr, end, p + 1);
+    }
+    return arr;
+}
+// --------------------------------------
+
+int* grabesort(int* arr, int num)    // сртировка расчёской
+{
+    float  fact_inc = 1.247;
+    int step = num / fact_inc;
+    while(step >= 1) {
+        for(int i = 0; i + step < num; i++){
+            if(arr[i] > arr[i + step]){
+                std::swap(arr[i], arr[i + step]);
+            }
+        }
+        step /= fact_inc;
+    }
+    return arr;
+}
+
+std::vector<int> quicksort(std::vector<int>& arr) {    // быстрая сортировка от гпт
+    if (arr.size() <= 1) {
+        return arr;
+    }
+    int pivot = arr[arr.size() / 2];
+    std::vector<int> left, middle, right;
+    for (int x : arr) {
+        if (x < pivot) {
+            left.push_back(x);
+        } else if (x == pivot) {
+            middle.push_back(x);
+        } else {
+            right.push_back(x);
+        }
+    }
+    std::vector<int> sorted_left = quicksort(left);
+    std::vector<int> sorted_right = quicksort(right);
+
+    std::vector<int> sorted_arr;
+    sorted_arr.reserve(sorted_left.size() + middle.size() + sorted_right.size());
+    
+    sorted_arr.insert(sorted_arr.end(), sorted_left.begin(), sorted_left.end());
+    sorted_arr.insert(sorted_arr.end(), middle.begin(), middle.end());
+    sorted_arr.insert(sorted_arr.end(), sorted_right.begin(), sorted_right.end());
+
+    return sorted_arr;
+}
+
+int* bin(int num_10){   // массив с двоичным разложением
+    int counter = 0;
+    for(int i = 1;; i++){
+        if(num_10 > pow(2, i)) counter++;
+        else {
+            counter++;
+            break;
+        }
+    }
+    int* bin {new int[counter]};
+    for(int i = counter - 1; i >= 0; i--){
+        bin[i] = num_10 % 2;
+        num_10 /= 2;
+    }
+    return bin;
+}
