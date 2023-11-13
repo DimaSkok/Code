@@ -74,12 +74,14 @@ unsigned long long int get_a_hexadecimal()    // перевод в десяти�
     return desat;
 }
 
-void massiv(int num){    // ввод в массив
-    int nums[1000];
-    for(int i = 0; i < num; i++){
+int* massiv(int num){    // ввод в массив
+    int* nums {new int[num]{0}};
+    for(int i = 0; i < num - 1; i++){
         int mas_num;
-        cin >> mas_num;
+        std::cin >> mas_num;
         nums[i] = mas_num;
+    }
+    return nums;
 }
 
 int* massiv_sort(int* nums, int num){    // сортировка пузырьком
@@ -166,6 +168,14 @@ int nok(int a, int b) {
 
 float pow(float a, float b){    // возведение числа а в степень b
     float result = 1;
+    for(; b != 0; b--){
+        result *= a;
+    }
+    return result;
+}
+
+int pow(int a, int b){    // возведение числа а в степень b
+    int result = 1;
     for(; b != 0; b--){
         result *= a;
     }
