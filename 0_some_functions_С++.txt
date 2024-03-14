@@ -236,14 +236,13 @@ int partition(int* arr, int end, int start)
     return p;
 }
 
-int* quicksort(int* arr, int end, int start)
+void quicksort(int* arr, int end, int start)
 {
     if(start < end){
         int p = partition(arr, end, start);
         quicksort(arr, p,  start);
         quicksort(arr, end, p + 1);
     }
-    return arr;
 }
 // --------------------------------------
 
