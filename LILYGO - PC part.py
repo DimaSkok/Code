@@ -4,7 +4,8 @@ import psutil
 import GPUtil
 
 # ----- ESP32 IP Address -----
-esp32_ip = "192.168.0.105"  # Replace with your ESP32's IP address
+num = input('последние 3 цифры - ')
+esp32_ip = "192.168.0." + num
 data_endpoint = f"http://{esp32_ip}/data"
 
 def get_gpu_usage():
